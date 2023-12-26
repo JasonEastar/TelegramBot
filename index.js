@@ -4,11 +4,9 @@ const app = express();
 const TelegramBot = require("node-telegram-bot-api");
 require("dotenv").config();
 
-
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const MESSAGE_SEND = process.env.MESSAGE_SEND;
 const YOUR_USER_ID = process.env.YOUR_USER_ID; //1792199242
-
 
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
@@ -27,7 +25,6 @@ try {
 bot.on("message", (msg) => {
   const chatId = msg.chat.id;
 
-
   // Nếu người gửi chưa đăng ký, thêm ID của họ vào mảng và lưu vào tệp
   if (registeredUsers.indexOf(chatId) === -1) {
     registeredUsers.push(chatId);
@@ -42,7 +39,7 @@ bot.on("message", (msg) => {
   // Kiểm tra xem người gửi có phải là bạn không
   if (String(msg.from.id) === String(YOUR_USER_ID) && msg.text) {
     // Gửi tin nhắn đến tất cả người dùng đã đăng ký khi bạn là người gửi
-    const message = `☘️<strong>${MESSAGE_SEND}</strong>🌻\n${msg.text}`;
+    const message = `<strong>${MESSAGE_SEND}</strong>\n${msg.text}`;
     sendBroadcastMessage(`${message}`);
   } else {
     console.log("Người gửi không phải là bạn:", msg.from.id);
@@ -71,13 +68,3 @@ function sendBroadcastMessage(message) {
 }
 
 console.log("Bot is running...");
-
-// Đoạn mã dưới đây chỉ là để tạo một trang "hello world" khi bạn truy cập http://localhost:3000
-app.get("/", (req, res) => {
-  res.send("BOT NHẬN KÈO TIPKUVIP");
-});
-
-// Mở cổng 3000 để lắng nghe các yêu cầu HTTP
-app.listen(3000, () => {
-  console.log(`Start Server: http://localhost:3000`);
-});
