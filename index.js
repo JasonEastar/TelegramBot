@@ -6,9 +6,8 @@ require("dotenv").config();
 
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
+const MESSAGE_SEND = process.env.MESSAGE_SEND;
 const YOUR_USER_ID = process.env.YOUR_USER_ID; //1792199242
-console.log('BOT_TOKEN', BOT_TOKEN);
-console.log('YOUR_USER_ID', YOUR_USER_ID);
 
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
@@ -41,7 +40,7 @@ bot.on("message", (msg) => {
   // Kiểm tra xem người gửi có phải là bạn không
   if (msg.from.id === YOUR_USER_ID && msg.text) {
     // Gửi tin nhắn đến tất cả người dùng đã đăng ký khi bạn là người gửi
-    const message = `☘️<strong>Tin nhắn mới nè</strong>🌻\n${msg.text}`;
+    const message = `☘️<strong>${MESSAGE_SEND}</strong>🌻\n${msg.text}`;
     sendBroadcastMessage(`${message}`);
   } else {
     console.log("Người gửi không phải là bạn:", msg.from.id);
