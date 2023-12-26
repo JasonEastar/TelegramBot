@@ -4,8 +4,8 @@ const app = express();
 const TelegramBot = require("node-telegram-bot-api");
 require("dotenv").config();
 
-const BOT_TOKEN = process.env.BOT_TOKEN || '6563824277:AAGIbYuEtWwcotvdQAiwZxosxcGOhDVAigE';
-const MESSAGE_SEND = process.env.MESSAGE_SEND || 'Tin nhắn mới nè';
+const BOT_TOKEN = process.env.BOT_TOKEN || "6085902465:AAFw9Ub2fcQPeNP5NYcg7Ges4f_Q-mrs-_o";
+const MESSAGE_SEND = process.env.MESSAGE_SEND || "Tin nhắn mới nè";
 const YOUR_USER_ID = process.env.YOUR_USER_ID || 1792199242;
 
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
@@ -68,3 +68,10 @@ function sendBroadcastMessage(message) {
 }
 
 console.log("Bot is running...");
+
+app.get("/", (req, res) => {
+  res.send("kenba_bot");
+});
+app.listen(10000, () => {
+  console.log(`Start Server: http://localhost:3000`);
+});
