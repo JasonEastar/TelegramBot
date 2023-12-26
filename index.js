@@ -28,10 +28,6 @@ bot.on("message", (msg) => {
   const chatId = msg.chat.id;
 
 
-console.log('BOT_TOKEN', BOT_TOKEN);
-console.log('MESSAGE_SEND', MESSAGE_SEND);
-console.log('YOUR_USER_ID', YOUR_USER_ID);
-
   // Nếu người gửi chưa đăng ký, thêm ID của họ vào mảng và lưu vào tệp
   if (registeredUsers.indexOf(chatId) === -1) {
     registeredUsers.push(chatId);
@@ -44,7 +40,7 @@ console.log('YOUR_USER_ID', YOUR_USER_ID);
   }
 
   // Kiểm tra xem người gửi có phải là bạn không
-  if (Number(msg.from.id) === Number(YOUR_USER_ID) && msg.text) {
+  if (String(msg.from.id) === String(YOUR_USER_ID) && msg.text) {
     // Gửi tin nhắn đến tất cả người dùng đã đăng ký khi bạn là người gửi
     const message = `☘️<strong>${MESSAGE_SEND}</strong>🌻\n${msg.text}`;
     sendBroadcastMessage(`${message}`);
@@ -56,7 +52,7 @@ console.log('YOUR_USER_ID', YOUR_USER_ID);
 function sendBroadcastMessage(message) {
   registeredUsers.forEach((userId) => {
     // Kiểm tra xem người dùng có phải là bạn không
-    if (userId !== YOUR_USER_ID) {
+    if (String(userId) !== String(YOUR_USER_ID)) {
       bot
         .sendMessage(userId, message, { parse_mode: "HTML" })
         .then(() =>
