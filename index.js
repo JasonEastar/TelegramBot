@@ -4,9 +4,9 @@ const app = express();
 const TelegramBot = require("node-telegram-bot-api");
 require("dotenv").config();
 
-const BOT_TOKEN = process.env.BOT_TOKEN;
-const MESSAGE_SEND = process.env.MESSAGE_SEND;
-const YOUR_USER_ID = process.env.YOUR_USER_ID; //1792199242
+const BOT_TOKEN = process.env.BOT_TOKEN || '6563824277:AAGIbYuEtWwcotvdQAiwZxosxcGOhDVAigE';
+const MESSAGE_SEND = process.env.MESSAGE_SEND || 'Tin nhắn mới nè';
+const YOUR_USER_ID = process.env.YOUR_USER_ID || 1792199242;
 
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
