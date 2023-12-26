@@ -9,6 +9,7 @@ const BOT_TOKEN = process.env.BOT_TOKEN;
 const MESSAGE_SEND = process.env.MESSAGE_SEND;
 const YOUR_USER_ID = process.env.YOUR_USER_ID; //1792199242
 
+
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
 let registeredUsers = [];
@@ -25,6 +26,11 @@ try {
 // Lắng nghe sự kiện nhận tin nhắn từ người dùng
 bot.on("message", (msg) => {
   const chatId = msg.chat.id;
+
+
+console.log('BOT_TOKEN', BOT_TOKEN);
+console.log('MESSAGE_SEND', MESSAGE_SEND);
+console.log('YOUR_USER_ID', YOUR_USER_ID);
 
   // Nếu người gửi chưa đăng ký, thêm ID của họ vào mảng và lưu vào tệp
   if (registeredUsers.indexOf(chatId) === -1) {
