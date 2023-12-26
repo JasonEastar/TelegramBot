@@ -44,7 +44,7 @@ console.log('YOUR_USER_ID', YOUR_USER_ID);
   }
 
   // Kiểm tra xem người gửi có phải là bạn không
-  if (msg.from.id === YOUR_USER_ID && msg.text) {
+  if (Number(msg.from.id) === Number(YOUR_USER_ID) && msg.text) {
     // Gửi tin nhắn đến tất cả người dùng đã đăng ký khi bạn là người gửi
     const message = `☘️<strong>${MESSAGE_SEND}</strong>🌻\n${msg.text}`;
     sendBroadcastMessage(`${message}`);
