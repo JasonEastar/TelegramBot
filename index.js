@@ -60,10 +60,14 @@ function sendBroadcastMessage(message) {
           )
         )
         .catch((error) =>
-          console.error("Lỗi khi gửi tin nhắn đến người dùng có ID:", userId)
+          console.error(
+            "Lỗi khi gửi tin nhắn đến người dùng có ID:",
+            userId,
+            error
+          )
         );
     } else {
-      console.log("Bỏ qua việc gửi tin nhắn đến ID của bạn:", userId);
+      console.log("Admin mới gửi tin nhắn:", message);
     }
   });
 }
