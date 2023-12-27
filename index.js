@@ -43,7 +43,11 @@ bot.on("message", (msg) => {
     const message = `<strong>${MESSAGE_SEND}</strong>\n${msg.text}`;
     sendBroadcastMessage(`${message}`);
   } else {
-    console.log("Người gửi không phải là bạn:", msg.from.id);
+    if (msg.text === "/start") {
+      console.log("Có người mới tham gia BOT:", msg.from.id);
+    } else {
+      console.log("Người gửi không phải là bạn:", msg.from.id);
+    }
   }
 });
 // Hàm gửi tin nhắn đến tất cả người dùng đã đăng ký
@@ -51,21 +55,18 @@ function sendBroadcastMessage(message) {
   registeredUsers.forEach((userId) => {
     // Kiểm tra xem người dùng có phải là bạn không
     // if (String(userId) !== String(YOUR_USER_ID)) {
-      bot
-        .sendMessage(userId, message, { parse_mode: "HTML" })
-        .then(() =>
-          console.log(
-            "Đã gửi tin nhắn thành công đến người dùng có ID:",
-            userId
-          )
+    bot
+      .sendMessage(userId, message, { parse_mode: "HTML" })
+      .then(() =>
+        console.log("Đã gửi tin nhắn thành công đến người dùng có ID:", userId)
+      )
+      .catch((error) =>
+        console.error(
+          "Lỗi khi gửi tin nhắn đến người dùng có ID:",
+          userId,
+          error
         )
-        .catch((error) =>
-          console.error(
-            "Lỗi khi gửi tin nhắn đến người dùng có ID:",
-            userId,
-            error
-          )
-        );
+      );
     // } else {
     //   console.log("Admin mới gửi tin nhắn:", message);
     // }
