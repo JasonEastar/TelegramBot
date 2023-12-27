@@ -50,7 +50,7 @@ bot.on("message", (msg) => {
 function sendBroadcastMessage(message) {
   registeredUsers.forEach((userId) => {
     // Kiểm tra xem người dùng có phải là bạn không
-    if (String(userId) !== String(YOUR_USER_ID)) {
+    // if (String(userId) !== String(YOUR_USER_ID)) {
       bot
         .sendMessage(userId, message, { parse_mode: "HTML" })
         .then(() =>
@@ -66,9 +66,9 @@ function sendBroadcastMessage(message) {
             error
           )
         );
-    } else {
-      console.log("Admin mới gửi tin nhắn:", message);
-    }
+    // } else {
+    //   console.log("Admin mới gửi tin nhắn:", message);
+    // }
   });
 }
 
