@@ -5,7 +5,7 @@ const TelegramBot = require("node-telegram-bot-api");
 require("dotenv").config();
 
 const BOT_TOKEN =
-  process.env.BOT_TOKEN || "6085902465:AAFw9Ub2fcQPeNP5NYcg7Ges4f_Q-mrs-_o";
+  process.env.BOT_TOKEN || "6348541054:AAGZQUfPQTO3tkaONneN-FKGRXzjZiWSGtg";
 const MESSAGE_SEND = process.env.MESSAGE_SEND || "Tin nhắn mới nè";
 const YOUR_USER_ID = process.env.YOUR_USER_ID || 1792199242;
 
@@ -23,6 +23,12 @@ try {
 }
 
 // Lắng nghe sự kiện nhận tin nhắn từ người dùng
+
+bot.onText(/\/start/, (msg) => {
+  const chatId = msg.chat.id;
+  bot.sendMessage(chatId, `ID của kênh là: ${chatId}`);
+});
+
 bot.on("message", (msg) => {
   const chatId = msg.chat.id;
 
@@ -40,7 +46,7 @@ bot.on("message", (msg) => {
   // Kiểm tra xem người gửi có phải là bạn không
   if (String(msg.from.id) === String(YOUR_USER_ID) && msg.text) {
     // Gửi tin nhắn đến tất cả người dùng đã đăng ký khi bạn là người gửi
-    const message = `<strong>${MESSAGE_SEND}</strong>\n${msg.text}`;
+    const message = `${msg.text}`;
     sendBroadcastMessage(`${message}`);
   } else {
     if (msg.text === "/start") {
@@ -54,7 +60,7 @@ bot.on("message", (msg) => {
 function sendBroadcastMessage(message) {
   registeredUsers.forEach((userId) => {
     // Kiểm tra xem người dùng có phải là bạn không
-    // if (String(userId) !== String(YOUR_USER_ID)) {
+    if (String(userId) !== String(YOUR_USER_ID)) {
     bot
       .sendMessage(userId, message, { parse_mode: "HTML" })
       .then(() =>
@@ -67,9 +73,9 @@ function sendBroadcastMessage(message) {
           error
         )
       );
-    // } else {
-    //   console.log("Admin mới gửi tin nhắn:", message);
-    // }
+    } else {
+      console.log("Admin mới gửi tin nhắn:", message);
+    }
   });
 }
 
@@ -91,5 +97,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(10000, () => {
-  console.log(`Start Server: http://localhost:3000`);
+  console.log(`Start Server: http://localhost:10000`);
 });
